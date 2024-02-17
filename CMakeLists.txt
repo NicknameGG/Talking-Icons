@@ -15,7 +15,7 @@ add_library(${PROJECT_NAME} SHARED
 )
 
 # Bindings path: D:\programming\cpp\geode\bindings
-set(GEODE_BINDINGS_REPO_PATH "D:/programming/cpp/geode/bindings")
+# set(GEODE_BINDINGS_REPO_PATH "D:/programming/cpp/geode/bindings")
 
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
