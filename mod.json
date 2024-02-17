@@ -1,0 +1,17 @@
+{
+	"geode": "2.0.0",
+	"gd": {
+		"win": "2.204",
+		"android": "2.205"
+	},
+	"version": "v1.0.0",
+	"id": "n.talking_icons",
+	"name": "Talking Icons",
+	"developer": "n",
+	"description": "Makes every icon ingame talk!",
+	"resources": {
+		"sprites": [
+			"resources/transparentSquare.png"
+		]
+	}
+}
