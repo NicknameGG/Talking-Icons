@@ -13,37 +13,40 @@ using namespace geode::prelude;
 IconDialogLabel* iconLabel = nullptr;
 
 class $modify(MenuGameLayer) {
-	if (!Loader::get()->isModLoaded("iristraa.mainmenuwallpaper")) {
 		bool init() {
 			if (!MenuGameLayer::init())
 				return false;
-			
-			iconLabel = IconDialogLabel::create("I hate my job", "bigFont.fnt", this->m_playerObject);
-			iconLabel->setScale(0.4);
-			this->addChild(iconLabel);
-	
-			iconLabel->iconRespawned();
-	
+
+			if (this->m_playerObject->isVisible())
+			{
+				iconLabel = IconDialogLabel::create("", "bigFont.fnt", this->m_playerObject);
+				iconLabel->setScale(0.4);
+				this->addChild(iconLabel);
+		
+				iconLabel->iconRespawned();
+			} else if (!this->m_playerObject->isVisible()) {
+				iconLabel->setVisible(false);
+			}
+
 			return true;
 		} 
-		
-		if (m_playerObject->isVisible()) {
-			void resetPlayer() {
-				MenuGameLayer::resetPlayer();
-				if (iconLabel)
-					iconLabel->iconRespawned();
-			}
-		
-			void destroyPlayer() {
-				if (iconLabel) {
-					IconDialogPopup::create(this->m_playerObject)->show();
-		        }
-		
-				MenuGameLayer::destroyPlayer();
+
+		void resetPlayer() {
+			MenuGameLayer::resetPlayer();
+			if (iconLabel && this->isVisible() && m_playerObject->isVisible()) {
+				iconLabel->iconRespawned();
 			}
 		}
-	}
-};
+				
+		
+		void destroyPlayer() {
+			if (iconLabel && this->isVisible() && m_playerObject->isVisible()) {
+				IconDialogPopup::create(this->m_playerObject)->show();
+		    }
+		
+			MenuGameLayer::destroyPlayer();
+		}
+	};
 
 $on_mod(Loaded) {
 	PhrasesLoader::loadPhrases();
