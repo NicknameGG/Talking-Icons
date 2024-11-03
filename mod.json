@@ -9,6 +9,9 @@
 	"id": "n.talking-icons",
 	"name": "Talking Icons",
 	"developer": "n",
+	"tags": [
+		"joke"
+	],
 	"description": "Makes every icon ingame talk!",
 	"resources": {
 		"sprites": [

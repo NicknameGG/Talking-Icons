@@ -7,30 +7,33 @@
 
 using namespace geode::prelude;
 
-IconDialogLabel* iconLabel = nullptr;
 
 class $modify(MenuGameLayer) {
+	struct Fields {
+		IconDialogLabel* m_iconLabel;
+	};
+
 	bool init() {
 		if (!MenuGameLayer::init())
 			return false;
 		
-		iconLabel = IconDialogLabel::create("I hate my job", "bigFont.fnt", this->m_playerObject);
-		iconLabel->setScale(0.4);
-		this->addChild(iconLabel);
+		m_fields->m_iconLabel = IconDialogLabel::create("I hate my job", "bigFont.fnt", this->m_playerObject);
+		m_fields->m_iconLabel->setScale(0.4);
+		this->addChild(m_fields->m_iconLabel);
 
-		iconLabel->iconRespawned();
+		m_fields->m_iconLabel->iconRespawned();
 
 		return true;
 	} 
 
 	void resetPlayer() {
 		MenuGameLayer::resetPlayer();
-		if (iconLabel)
-			iconLabel->iconRespawned();
+		if (m_fields->m_iconLabel)
+			m_fields->m_iconLabel->iconRespawned();
 	}
 
 	void destroyPlayer() {
-		if (iconLabel) {
+		if (m_fields->m_iconLabel) {
 			auto popup = IconDialogPopup::create(this->m_playerObject);
 			popup->setScale(0.5);
 			// Center
