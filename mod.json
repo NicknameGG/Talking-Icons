@@ -1,11 +1,12 @@
 {
-	"geode": "2.0.0",
+	"geode": "3.8.0",
 	"gd": {
-		"win": "2.204",
-		"android": "2.205"
+		"win": "2.206",
+		"android": "2.206",
+		"mac": "2.206"
 	},
 	"version": "v1.0.0",
-	"id": "n.talking_icons",
+	"id": "n.talking-icons",
 	"name": "Talking Icons",
 	"developer": "n",
 	"description": "Makes every icon ingame talk!",

@@ -5,22 +5,22 @@
 
 using namespace geode::prelude;
 
-class IconDialogPopup : public cocos2d::CCLayer { 
+class IconDialogPopup : public cocos2d::CCNode { 
 public:
   PlayerObject* m_pPlayerObject;
   CCScale9Sprite* m_pBackground;
   std::string m_sPhrase;
 
   static IconDialogPopup *create(PlayerObject* playerObject) {
-    IconDialogPopup *pRet = new IconDialogPopup();
-    if (pRet && pRet->init(playerObject)) {
-      pRet->autorelease();
-      return pRet;
-    } else {
-      delete pRet;
-      pRet = 0;
-      return 0;
-    }
+      IconDialogPopup *pRet = new IconDialogPopup();
+      if (pRet && pRet->init(playerObject)) {
+          pRet->autorelease();
+          return pRet;
+      } else {
+          delete pRet;
+          pRet = 0;
+          return 0;
+      }
   };
 
   CCSprite *clonePlayerSprite() {
@@ -52,7 +52,7 @@ public:
   }
 
     bool init(PlayerObject* playerObject) {
-        if (!CCLayer::init()) return false;
+        if (!CCNode::init()) return false;
         std::string phrase = PhrasesLoader::getRandomDeathPhrase();
         this->m_sPhrase = phrase.c_str();
 
@@ -62,7 +62,7 @@ public:
         m_pBackground->setContentSize({ 380.0f, 95.0f });
         
         // Position 50 px from bottom, and centered
-        m_pBackground->setPosition({ CCDirector::get()->getWinSize().width / 2.0f, 60.0f });
+        // m_pBackground->setPosition({ CCDirector::get()->getWinSize().width / 2.0f, 60.0f });
 
         CCSprite* frameSprite = this->clonePlayerSprite();
 
@@ -79,7 +79,6 @@ public:
         label->setPosition(m_pBackground->getContentSize() / 2.0f - 10.0f);
         m_pBackground->addChild(label);
 
-
         this->addChild(m_pBackground);
 
         return true;
@@ -87,8 +86,8 @@ public:
 
     CCSequence* createShowSequence() {
         auto fadeIn = CCFadeIn::create(0.25f);
-        auto delay = CCDelayTime::create(0.5f);
-        auto fadeOut = CCFadeOut::create(1.0f + m_sPhrase.length() * 0.02f);
+        auto delay = CCDelayTime::create(0.5f + m_sPhrase.length() * 0.02f);
+        auto fadeOut = CCFadeOut::create(1.0f);
         auto remove = CCRemoveSelf::create();
 
         return CCSequence::create(fadeIn, delay, fadeOut, remove, nullptr);
